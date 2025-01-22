@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "ES2021",
+    "declaration": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "sourceMap": false,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ],
+    },
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "**/src/**/*"
+  ]
+}
