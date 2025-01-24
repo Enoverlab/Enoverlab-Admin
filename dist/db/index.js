@@ -10,7 +10,6 @@ const initialize = async () => {
         const productionMongoString = process.env.MongoStringProd;
         const preferredDb = process.env.NODE_ENV === 'development' ? testMongoString : productionMongoString;
         const db = await mongoose.connect(preferredDb);
-        console.log('launched db');
         return { db };
     }
     catch (error) {
