@@ -1,4 +1,4 @@
-import componentLoader from "src/admin/component-loader.js";
+import componentLoader from "../admin/component-loader.js";
 import { authorModel, blogModel } from "./blog.schema.js";
 import cloudinary from '../config/cloudinary.config.js';
 import { ValidationError } from 'adminjs'
