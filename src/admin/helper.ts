@@ -14,15 +14,17 @@ try {
   }
   
   async function main(){
-    await connect( process.env.NODE_ENV == 'development' ? testMongoString :  productionMongoString)
+    await connect(productionMongoString)
+    console.log('connected')
+    // await connect( process.env.NODE_ENV == 'development' ? testMongoString :  productionMongoString)
     return
 }
 
 
 const createNewSuperAdmin = async()=>{
-  const email = "info@enoverlab.com"
-  const name = "enoverlabAdmin"
-  const password = 'Password*'
+  const email = "toyoakintayo@gmail.com"
+  const name = "Funmi Akintayo"
+  const password = 'Toyosi190309'
   const getAdminIdentity = await admin.findOne({ email : email.toLowerCase()}).exec()
   if(getAdminIdentity ){
     throw new Error('Email Already in use')
@@ -32,7 +34,7 @@ const createNewSuperAdmin = async()=>{
         name,
         email,
         password: hashpw,
-        role : 'superAdmin'
+        role : 'admin'
       });
       
       newUser.save().then(() => {
