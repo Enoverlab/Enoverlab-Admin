@@ -15,11 +15,6 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "paths": {
-      "@src/*": [
-        "src/*"
-      ],
-    },
     "resolveJsonModule": true,
     "esModuleInterop": true,
   },
