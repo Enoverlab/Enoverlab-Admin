@@ -17,6 +17,8 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "types": ["node"], // Ensures Node.js types are included
+    "typeRoots": ["./node_modules/@types"],
   },
   "ts-node": {
     "require": ["tsconfig-paths/register"]
@@ -24,8 +26,5 @@
   "exclude": [
     "node_modules"
   ],
-  "include": [
-    "src/**/*.ts",
-    "**/src/**/*"
-  ]
+  "include":  ["src/**/*.ts", "src/**/*.tsx", "src/**/*"] 
 }

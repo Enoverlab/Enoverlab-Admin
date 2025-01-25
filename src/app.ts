@@ -39,6 +39,7 @@ const start = async () => {
   const admin = new AdminJS(options);
 
   if (process.env.NODE_ENV === 'production') {
+    console.log('initializing..')
     await admin.initialize();
   } else {
     admin.watch();
