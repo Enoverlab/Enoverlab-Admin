@@ -2,8 +2,10 @@ import componentLoader from "../admin/component-loader.js";
 import { authorModel, blogModel } from "./blog.schema.js";
 import cloudinary from '../config/cloudinary.config.js';
 import { ValidationError } from 'adminjs';
+import path from "path";
+let absolute = path.resolve('./src/components/UploadImage.tsx');
 const Components = {
-    UploadImage: componentLoader.add('UploadImage', 'src/components/UploadImage.js'),
+    UploadImage: componentLoader.add('UploadImage', absolute),
 };
 export const blogResource = {
     resource: blogModel,
