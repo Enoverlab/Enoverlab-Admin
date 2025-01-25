@@ -12,14 +12,14 @@ catch (error) {
     console.log(error);
 }
 async function main() {
-    await connect(productionMongoString);
     console.log('connected');
+    await connect(process.env.NODE_ENV == 'development' ? testMongoString : productionMongoString);
     return;
 }
 const createNewSuperAdmin = async () => {
-    const email = "toyoakintayo@gmail.com";
-    const name = "Funmi Akintayo";
-    const password = 'Toyosi190309';
+    const email = "dee@gmail.com";
+    const name = "dee";
+    const password = '123456789';
     const getAdminIdentity = await admin.findOne({ email: email.toLowerCase() }).exec();
     if (getAdminIdentity) {
         throw new Error('Email Already in use');

@@ -3,11 +3,21 @@ export const coursesResource = {
     resource: courseModel, // Assuming Course is a Mongoose model or a Sequelize model
     options: {
         parent : 'Enoverlab Short Course',
+        actions: {
+            new: {
+              isAccessible: ({ currentAdmin }) => currentAdmin.role === 'superAdmin',
+            },
+        },
     }
 };
 export const moduleResource = {
     resource : moduleModel,
     options: {
         parent : 'Enoverlab Short Course',
+        actions: {
+            new: {
+              isAccessible: ({ currentAdmin }) => currentAdmin.role === 'superAdmin',
+            },
+        },
     }
 }
