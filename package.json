@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "clean": "rm -rf dist",
     "lint": "eslint \"src\"",
     "start": "node dist/app.js",
     "dev": "tsx ./src/app",
