@@ -59,6 +59,10 @@ const start = async () => {
       resave: true,
     },
   );
+
+  app.get('/',(req,res,next)=>{
+    res.redirect('/admin')
+  })
   
   app.use('/api/v1/', blogRouter)
 

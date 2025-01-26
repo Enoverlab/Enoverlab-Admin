@@ -8,7 +8,7 @@
     "lint": "eslint \"src\"",
     "start": "node dist/app.js",
     "dev": "tsx ./src/app",
-    "dev:hot": "nodemon --exec \"npm run dev\" --watch ./src -e ts"
+    "dev:hot": "nodemon --exec \"npm run dev\" --watch ./src -e ts --signal SIGKILL"
   },
   "dependencies": {
     "@adminjs/express": "^6.1.0",

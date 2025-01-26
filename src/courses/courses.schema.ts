@@ -71,7 +71,8 @@ const moduleSchema = new Schema({
         type : String
     },
     lessonVideo : {
-        required : String
+        type : String,
+        required : true
     },
     courseId : {
         required : true, 

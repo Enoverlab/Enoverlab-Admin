@@ -1,11 +1,21 @@
+import { Components } from "src/admin/component-loader.js";
 import {courseModel, moduleModel} from "./courses.schema.js"
 export const coursesResource = {
     resource: courseModel, // Assuming Course is a Mongoose model or a Sequelize model
     options: {
         parent : 'Enoverlab Short Course',
+        properties : {
+            courseImg : {
+                components : {
+                    edit : Components.UploadImage
+                }
+            }
+        },
         actions: {
             new: {
-              isAccessible: ({ currentAdmin }) => currentAdmin.role === 'superAdmin',
+              isAccessible: ({ currentAdmin }) =>{
+                return currentAdmin.role === 'superAdmin'
+              }
             },
         },
     }
@@ -15,8 +25,8 @@ export const moduleResource = {
     options: {
         parent : 'Enoverlab Short Course',
         actions: {
-            new: {
-              isAccessible: ({ currentAdmin }) => currentAdmin.role === 'superAdmin',
+            new:{
+              isAccessible: ({ currentAdmin }) => currentAdmin.role === 'superAdmin'
             },
         },
     }
