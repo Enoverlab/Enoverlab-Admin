@@ -15,6 +15,9 @@ export const coursesResource = {
             new: {
               isAccessible: ({ currentAdmin }) =>{
                 return currentAdmin.role === 'superAdmin'
+              },
+              isVisible : ({currentAdmin})=>{
+                return currentAdmin.role === 'superAdmin'
               }
             },
         },
@@ -26,7 +29,10 @@ export const moduleResource = {
         parent : 'Enoverlab Short Course',
         actions: {
             new:{
-              isAccessible: ({ currentAdmin }) => currentAdmin.role === 'superAdmin'
+              isAccessible: ({ currentAdmin }) => currentAdmin.role === 'superAdmin',
+              isVisible : ({currentAdmin})=>{
+                return currentAdmin.role === 'superAdmin'
+              }
             },
         },
     }
