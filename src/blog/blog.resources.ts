@@ -1,7 +1,7 @@
 import { authorModel, blogModel } from "./blog.schema.js";
 import cloudinary from '../config/cloudinary.config.js';
 import { ValidationError } from 'adminjs'
-import { Components } from "src/admin/component-loader.js";
+import { Components } from "../admin/component-loader.js";
 
 
 
