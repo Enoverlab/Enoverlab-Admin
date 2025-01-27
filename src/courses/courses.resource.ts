@@ -1,4 +1,4 @@
-import { Components } from "src/admin/component-loader.js";
+import { Components } from "../admin/component-loader.js";
 import {courseModel, moduleModel} from "./courses.schema.js"
 export const coursesResource = {
     resource: courseModel, // Assuming Course is a Mongoose model or a Sequelize model
