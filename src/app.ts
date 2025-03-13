@@ -69,6 +69,7 @@ const start = async () => {
   app.use(admin.options.rootPath, router);
 
   app.use(function(req, res, next) {
+    console.log(req.url)
     next(createError(404));
   });
   
