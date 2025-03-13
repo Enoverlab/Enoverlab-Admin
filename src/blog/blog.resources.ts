@@ -1,36 +1,32 @@
-import componentLoader from "../admin/component-loader.js";
 import { authorModel, blogModel } from "./blog.schema.js";
 import cloudinary from '../config/cloudinary.config.js';
 import { ValidationError } from 'adminjs'
-import path from "path";
+import { Components } from "../admin/component-loader.js";
 
-let absolute = path.resolve( './src/components/UploadImage.tsx');
-const Components = {
-    UploadImage: componentLoader.add('UploadImage', absolute),
-}
+
 
 export const blogResource = {
   resource: blogModel, // Assuming Course is a Mongoose model or a Sequelize model
   options: {
     parent : 'Enoverlab Blog',
     properties : {
-        content : {
-          type : 'richtext'
+      content : {
+        type : 'richtext'
+      },
+      image : {
+        components: {
+          edit : Components.UploadImage
         },
-        image : {
-          components: {
-            edit : Components.UploadImage
-          },
-        },
-        description : {
-          description: "Maximum characters of 100",
-        },
-        createdAt : {
-          isVisible : false
-        },
-        updatedAt : {
-          isVisible : false
-        }
+      },
+      description : {
+        description: "Maximum characters of 100",
+      },
+      createdAt : {
+        isVisible : false
+      },
+      updatedAt : {
+        isVisible : false
+      }
     },
     actions: {
       new: {

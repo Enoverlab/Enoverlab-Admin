@@ -3,6 +3,7 @@ import { coursesResource,moduleResource } from '../courses/courses.resource.js';
 
 import componentLoader from './component-loader.js';
 import { authorResource, blogResource } from '../blog/blog.resources.js';
+import { assessmentQuestionResource } from 'src/webAssessment/webAssessmentResource.js';
 
 
 
@@ -14,7 +15,8 @@ const options: AdminJSOptions = {
     coursesResource,
     moduleResource,
     blogResource,
-    authorResource
+    authorResource,
+    assessmentQuestionResource
   ],
   databases: [],
 };

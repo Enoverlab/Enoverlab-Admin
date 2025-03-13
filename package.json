@@ -8,7 +8,7 @@
     "lint": "eslint \"src\"",
     "start": "node dist/app.js",
     "dev": "tsx ./src/app",
-    "dev:hot": "nodemon --exec \"npm run dev\" --watch ./src -e ts"
+    "dev:hot": "nodemon --exec \"npm run dev\" --watch ./src -e ts --signal SIGKILL"
   },
   "dependencies": {
     "@adminjs/express": "^6.1.0",
@@ -22,7 +22,8 @@
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.3",
     "mongoose": "^8.0.0",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@tsconfig/node-lts-strictest-esm": "^18.12.1",

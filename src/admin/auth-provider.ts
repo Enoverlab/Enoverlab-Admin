@@ -18,7 +18,7 @@ const provider = new DefaultAuthProvider({
     if(!match){
       return null
     }else{
-      return {email : user.email}
+      return {email : user.email, role : user.role}
     }
   },
 });

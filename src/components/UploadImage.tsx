@@ -31,10 +31,15 @@ const UploadImage: React.FC<CustomNewComponentProps> = ({ onChange, property, re
         * {property.name}
       </label>
         <section style={{backgroundColor: "white",padding: "2rem 4rem",borderRadius: "0.375rem",position: "relative",}}>
-            <div style={{backgroundColor: "#FCFAF2", borderRadius: "0.5rem",borderWidth: "2px",borderStyle: "dashed",borderColor: "rgba(51, 51, 65, 0.75)",padding: "30.5px"}}>
-                <div style={{display: "flex",justifyContent: "center",cursor: "pointer",}}>
-                {preview ? <img src={preview} alt="Preview" style={{ marginTop: '10px', maxWidth: '100px' }} onClick={handleFileInputClick}  /> : <img src="/public/upload.svg" alt="" onClick={handleFileInputClick} />}
-                </div>
+            <div onClick={handleFileInputClick} style={{backgroundColor: "#FCFAF2", borderRadius: "0.5rem",borderWidth: "2px",borderStyle: "dashed",borderColor: "rgba(51, 51, 65, 0.75)",padding: "30.5px"}}>
+              <div style={{display: "flex",justifyContent: "center",cursor: "pointer",}}>
+              {preview ? <img src={preview} alt="Preview" style={{ marginTop: '10px', maxWidth: '100px' }} onClick={handleFileInputClick}  /> : (<div
+              style={{display : 'flex', flexDirection : 'column', alignItems : 'center'}}>
+              <p>Click to upload</p>
+              <p>Max no of Image is 1</p>
+              <p>.Png, .Jpg images only*</p>
+              </div>) }
+              </div>
 
                 <input type="file" id="image" ref={inputRef} style={{ display: "none" }} name="attachment" accept="image/*" onChange={handleChange}/>
             </div>
