@@ -4,9 +4,8 @@ import { ValidationError } from 'adminjs'
 import { Components } from "../admin/component-loader.js";
 
 
-
 export const blogResource = {
-  resource: blogModel, // Assuming Course is a Mongoose model or a Sequelize model
+  resource: blogModel,
   options: {
     parent : 'Enoverlab Blog',
     properties : {
