@@ -12,6 +12,11 @@ export const coursesResource = {
             edit : Components.UploadImage
           }
         },
+        modules : {
+          components : {
+            edit : Components.FilteredModules
+          }
+        },
         ratings : {
           isVisible : false
         },

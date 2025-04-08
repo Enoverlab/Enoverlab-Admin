@@ -1,45 +1,65 @@
 import React, { useEffect, useState } from 'react'
-import { ApiClient } from 'adminjs'
+import Select, { MultiValue } from 'react-select'
+import { ApiClient, BasePropertyProps } from 'adminjs'
 
 const api = new ApiClient()
 
-const FilteredModulesSelect = ({ property, onChange, record }) => {
-  const [modules, setModules] = useState([])
+interface ModuleOption {
+  value: string
+  label: string
+}
+
+const FilteredModules: React.FC<BasePropertyProps> = ({ property, onChange, record }) => {
+  const [options, setOptions] = useState<ModuleOption[]>([])
+  const [selected, setSelected] = useState<ModuleOption[]>([])
 
   useEffect(() => {
-    if (!record?.id) return
+    const fetchModules = async () => {
+      const params = new URLSearchParams({ perPage: '100' })
 
-    const params = new URLSearchParams({
-      'filters.courseId': record.id,
-      'perPage': '100',
-    })
+      const res = await api.resourceAction({
+        resourceId: 'module',
+        actionName: 'list',
+        query: params.toString(),
+      })
 
-    api.resourceAction({
-      resourceId: 'Module',
-      actionName: 'list',
-      query: params.toString(),
-    }).then(res => {
-      setModules(res.data.records || [])
-    })
-  }, [record?.id])
+      const records = res.data.records || []
+      const formattedOptions = records.map((mod: any): ModuleOption => ({
+        value: mod.id,
+        label: mod.params.title || mod.id,
+      }))
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selected = Array.from(e.target.selectedOptions).map(opt => opt.value)
-    onChange(property.name, selected)
+      setOptions(formattedOptions)
+
+      // ✅ Only set selected if it's still empty (first load)
+      if (selected.length === 0) {
+        const existingModuleIds = (record?.params?.[property.name] || []) as string[]
+        const preSelected = formattedOptions.filter(opt => existingModuleIds.includes(opt.value))
+        setSelected(preSelected)
+      }
+    }
+
+    fetchModules()
+  }, [])
+
+  const handleChange = (selectedOptions: MultiValue<ModuleOption>) => {
+    const selectedValues = selectedOptions.map(opt => opt.value)
+    setSelected(selectedOptions as ModuleOption[])
+    onChange(property.name, selectedValues)
   }
 
   return (
     <div>
-      <label>Modules for this course</label>
-      <select multiple onChange={handleChange} defaultValue={record?.params?.[property.name] || []}>
-        {modules.map(mod => (
-          <option key={mod.id} value={mod.id}>
-            {mod.params.title || mod.id}
-          </option>
-        ))}
-      </select>
+      <label style={{ display: 'block', marginBottom: 5 }}>{property.label || 'Modules'}</label>
+      <Select
+        isMulti
+        options={options}
+        value={selected}
+        onChange={handleChange}
+        placeholder="Search & select modules..."
+      />
     </div>
   )
 }
 
-export default FilteredModulesSelect
+export default FilteredModules
