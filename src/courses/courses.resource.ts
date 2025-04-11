@@ -52,6 +52,9 @@ export const moduleResource = {
           edit : Components.UploadVideo
         }
       },
+      duration : {
+        isVisible : false
+      },
       createdAt : {
         isVisible : false
       },
@@ -79,17 +82,19 @@ export const moduleResource = {
               }else if(!courseId){
                 throw new ValidationError({courseId : {message : 'Kindly include a tag'}})
               }
-            }
-            if(lessonVideo.path){
+            }else if(lessonVideo.path){
               try {
                 const uploadedFile = await cloudinary.uploader.upload(lessonVideo.path, { 
                   resource_type: 'video',
-                  chunk_size: 6000000, 
+                  chunk_size: 6000000,
+
                   folder: `course_${courseId}` 
                 });
+                console.log(uploadedFile)
                 request.payload = {
                   ...request.payload,
                   lessonVideo: uploadedFile.secure_url,
+                  duration : `${Math.ceil(uploadedFile.duration/60)} min`
                 };
               } catch (error) {
                 console.log({error})
@@ -114,8 +119,7 @@ export const moduleResource = {
               }else if(!courseId){
                 throw new ValidationError({courseId : {message : 'Kindly include a tag'}})
               }
-            }
-            if(lessonVideo.path){
+            }else if(lessonVideo.path){
               try {
                 const uploadedFile = await cloudinary.uploader.upload(lessonVideo.path, { 
                   resource_type: 'video',
@@ -125,6 +129,7 @@ export const moduleResource = {
                 request.payload = {
                   ...request.payload,
                   lessonVideo: uploadedFile.secure_url,
+                  duration : `${Math.ceil(uploadedFile.duration/60)} min`
                 };
               } catch (error) {
                 console.log({error})

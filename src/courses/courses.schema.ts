@@ -71,6 +71,9 @@ const moduleSchema = new Schema({
         type : String,
         required : true
     },
+    duration : {
+        type : String,
+    },
     courseId : {
         required : true, 
         type : mongoose.Schema.Types.ObjectId, 
