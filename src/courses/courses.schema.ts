@@ -7,7 +7,6 @@ const courseSchema = new Schema({
         type : String,
         required : true
     },
-
     courseImg : {
         type : String,
         required : true
@@ -23,25 +22,23 @@ const courseSchema = new Schema({
         type : Number,
         required : true
     },
-    courseLevel : String,
-    averageRating : Number,
+    courseLevel : {
+        type : String,
+        required : true,
+        enum : ['basic', 'intermediate', 'advanced']
+    },
+    averageRating : {
+        type : Number,
+    },
     modules : [
         {
             type : mongoose.Schema.Types.ObjectId, 
             ref : 'module',
         }
     ],
-
     ratings : {
         type : Number,
         default : 0
-        // type : [
-        //     {
-        //         type : mongoose.Schema.Types.ObjectId, 
-        //         ref : 'rating',
-        //         default : 0
-        //     }
-        // ]
     }
 },{timestamps : true})
 
@@ -77,7 +74,8 @@ const moduleSchema = new Schema({
     courseId : {
         required : true, 
         type : mongoose.Schema.Types.ObjectId, 
-        ref : 'course'}
+        ref : 'course'
+    }
 
 },{timestamps : true})
 
