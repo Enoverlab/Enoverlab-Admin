@@ -2,6 +2,12 @@ import { ValidationError } from "adminjs";
 import { Components } from "../admin/component-loader.js";
 import cloudinary from '../config/cloudinary.config.js';
 import {courseModel, moduleModel} from "./courses.schema.js"
+import videoCompressor from 'video-compressor'
+import fs from 'node:fs'
+import path from "node:path"
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const deleteAction = (entityName,entityType)=> (async (response, request, context) => {
   const { record } = context;
@@ -31,6 +37,13 @@ const deleteAction = (entityName,entityType)=> (async (response, request, contex
 
   return response;
 });
+const uploadLargeVideo = async (filePath, folder) => {
+  return await cloudinary.uploader.upload_large(filePath, {
+    resource_type: 'video',
+    chunk_size: 6000000,
+    folder
+  });
+};
 
 export const coursesResource = {
     resource: courseModel, // Assuming Course is a Mongoose model or a Sequelize model
@@ -160,6 +173,7 @@ export const moduleResource = {
         before: async (request) => {
           if (request.payload){
             const {lessonVideo,courseId} = request.payload
+            console.log(Object.entries(request.payload))
             Object.entries(request.payload).forEach(([key,value])=>{
               if(Array.isArray(value) && value.length == 0){
                 throw new ValidationError({key : {message : `Please include a ${key}`}})
@@ -167,22 +181,7 @@ export const moduleResource = {
                 throw new ValidationError({key : {message : `Please include a ${key}`}})
               }
             })
-            if(lessonVideo?.path){
-              try {
-                const uploadedFile = await cloudinary.uploader.upload(lessonVideo.path, { 
-                  resource_type: 'video',
-                  chunk_size: 6000000,
-                  folder: `course_${courseId}` 
-                });
-                request.payload = {
-                  ...request.payload,
-                  lessonVideo: uploadedFile.secure_url,
-                  duration : `${Math.ceil(uploadedFile.duration/60)} min`
-                };
-              } catch (error) {
-                console.log({error})
-              }
-            }
+            console.log(request)
             return request;
           }
         },
