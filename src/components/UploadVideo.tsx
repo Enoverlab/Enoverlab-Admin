@@ -86,7 +86,6 @@ const UploadVideo: React.FC<CustomNewComponentProps> = ({ onChange, property, re
     if(abortControllerRef.current){
       abortControllerRef.current.abort()
       setUploading(false)
-      console.log('not uploading')
     }
   }
   const handleFileInputClick = () => {
